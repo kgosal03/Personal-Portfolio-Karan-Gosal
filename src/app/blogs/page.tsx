@@ -8,7 +8,9 @@ export default function BlogsPage() {
     <section className="w-[90%] sm:w-[60%] max-w-6xl mx-auto flex flex-col items-start justify-center space-y-6 px-8 text-left pt-[40px]">
       {/* Header */}
       <div className="flex justify-between items-center mb-8">
-        <h1 className="font-semibold text-2xl tracking-tighter">All Blog Posts</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold">
+          All Blog Posts
+        </h1>
       </div>
 
       {/* Blog Grid */}
