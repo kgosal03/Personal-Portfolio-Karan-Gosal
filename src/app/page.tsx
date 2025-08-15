@@ -53,7 +53,7 @@ export default function Home() {
         </Avatar>
 
         {/* Description */}
-        <p className=" text-lg text-gray-600 dark:text-gray-300">
+        <p className=" text-lg font-light text-black dark:text-gray-300">
           I’m a Software Engineering student at the University of Victoria,
           specializing in Artificial Intelligence and Machine Learning,
           graduating in December 2025. From the start, I’ve been fascinated
