@@ -9,7 +9,7 @@ export default function Home() {
         
         {/* Heading */}
         <h1 className="text-2xl sm:text-3xl font-bold">
-          Hey, I am Karan Gosal 👋
+          Hey, I am Karan Gosal
         </h1>
 
         {/* Social Links */}
@@ -21,7 +21,14 @@ export default function Home() {
             className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
           >
             <Github className="w-5 h-5" />
-            <span>GitHub</span>
+    
+          </a>
+          <a
+            href="mailto:karangosal9779@email.com"
+            className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <Mail className="w-5 h-5" />
+
           </a>
           <a
             href="https://linkedin.com/in/kgosal03"
@@ -30,14 +37,7 @@ export default function Home() {
             className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
           >
             <Linkedin className="w-5 h-5" />
-            <span>LinkedIn</span>
-          </a>
-          <a
-            href="mailto:karangosal9779@email.com"
-            className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <Mail className="w-5 h-5" />
-            <span>Email</span>
+
           </a>
         </div>
 
