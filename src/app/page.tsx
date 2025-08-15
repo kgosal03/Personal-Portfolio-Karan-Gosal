@@ -68,7 +68,15 @@ export default function Home() {
           my career by working with innovative teams and pushing the boundaries
           of what technology can do.
         </p>
+        {/* Divider */}
+        <div className="my-8 w-full border-t-2"></div>
+
+        {/* Heading Blog Posts */}
+        <h1 className="text-xl sm:text-3xl font-bold">
+          Lastest Blog Posts
+        </h1>
       </div>
+
     </main>
   )
 }
