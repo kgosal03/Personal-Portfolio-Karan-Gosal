@@ -1,24 +1,8 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { getBlogPosts } from "@/lib/getBlogPosts";
 
 export default function BlogsPage() {
-  const blogPosts = [
-    {
-      title: "Using syntax trees in Python",
-      date: "July 2, 2024",
-      readTime: "10 min read",
-      description: "An exploration of abstract and concrete syntax trees in Python, with practical examples using 'ast' and 'LibCST.'",
-      href: "/blog/syntax-trees-in-python",
-    },
-    {
-      title: "Comparing the Use of Our Web Development Tools to More Mainstream Ones",
-      date: "June 6, 2024",
-      readTime: "8 min read",
-      description: "A reflection on the differences between the tools we use at ARCsoft and the more mainstream ones, based on a passion project experience.",
-      href: "/blog/web-dev-tools",
-    },
-    // Add more posts here...
-  ]
+  const blogPosts = getBlogPosts();
 
   return (
     <section className="w-[90%] sm:w-[60%] max-w-6xl mx-auto flex flex-col items-start justify-center space-y-6 px-8 text-left pt-[40px]">
@@ -30,7 +14,11 @@ export default function BlogsPage() {
       {/* Blog Grid */}
       <div className="grid gap-6">
         {blogPosts.map((post, idx) => (
-          <Link key={idx} href={post.href} className="block rounded-xl border bg-card text-card-foreground shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors">
+          <Link
+            key={idx}
+            href={`/blogs/${post.slug}`}
+            className="block rounded-xl border bg-card text-card-foreground shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors"
+          >
             <div className="flex flex-col space-y-1.5 p-6">
               <div className="font-semibold leading-none tracking-tight">{post.title}</div>
               <div className="text-sm text-muted-foreground tabular-nums">
@@ -44,5 +32,5 @@ export default function BlogsPage() {
         ))}
       </div>
     </section>
-  )
+  );
 }
