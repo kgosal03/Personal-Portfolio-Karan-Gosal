@@ -1,8 +1,48 @@
-export default function Blogs() {
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+
+export default function BlogsPage() {
+  const blogPosts = [
+    {
+      title: "Using syntax trees in Python",
+      date: "July 2, 2024",
+      readTime: "10 min read",
+      description: "An exploration of abstract and concrete syntax trees in Python, with practical examples using 'ast' and 'LibCST.'",
+      href: "/blog/syntax-trees-in-python",
+    },
+    {
+      title: "Comparing the Use of Our Web Development Tools to More Mainstream Ones",
+      date: "June 6, 2024",
+      readTime: "8 min read",
+      description: "A reflection on the differences between the tools we use at ARCsoft and the more mainstream ones, based on a passion project experience.",
+      href: "/blog/web-dev-tools",
+    },
+    // Add more posts here...
+  ]
+
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-3xl font-bold">Blogs</h1>
-      <p className="text-gray-600">Here are some of my latest blog posts...</p>
-    </main>
+    <section className="w-[90%] sm:w-[60%] max-w-6xl mx-auto flex flex-col items-start justify-center space-y-6 px-8 text-left pt-[40px]">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="font-semibold text-2xl tracking-tighter">All Blog Posts</h1>
+      </div>
+
+      {/* Blog Grid */}
+      <div className="grid gap-6">
+        {blogPosts.map((post, idx) => (
+          <Link key={idx} href={post.href} className="block rounded-xl border bg-card text-card-foreground shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors">
+            <div className="flex flex-col space-y-1.5 p-6">
+              <div className="font-semibold leading-none tracking-tight">{post.title}</div>
+              <div className="text-sm text-muted-foreground tabular-nums">
+                {post.date} · {post.readTime}
+              </div>
+            </div>
+            <div className="p-6 pt-0 text-muted-foreground">
+              {post.description}
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
   )
 }

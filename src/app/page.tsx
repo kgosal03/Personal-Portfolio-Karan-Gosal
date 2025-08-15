@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail } from "lucide-react"
 
 export default function Home() {
   return (
-    <main className="flex justify-center min-h-screen">
+    <main className="flex justify-center pt-[40px]">
       <div className="w-[90%] sm:w-[60%] max-w-6xl mx-auto flex flex-col items-start justify-center space-y-6 px-8 text-left">
         
         {/* Heading */}
@@ -56,16 +56,6 @@ export default function Home() {
           my career by working with innovative teams and pushing the boundaries
           of what technology can do.
         </p>
-
-        {/* Navigation Buttons */}
-        <div className="space-x-4">
-          <Link href="/blogs">
-            <Button variant="default">Go to Blogs</Button>
-          </Link>
-          <Link href="/projects">
-            <Button variant="secondary">See Projects</Button>
-          </Link>
-        </div>
       </div>
     </main>
   )
