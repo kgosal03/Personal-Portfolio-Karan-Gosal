@@ -8,7 +8,7 @@ export default function Home() {
       <div className="w-[90%] sm:w-[60%] max-w-6xl mx-auto flex flex-col items-start justify-center space-y-6 px-8 text-left">
         
         {/* Heading */}
-        <h1 className="text-4xl sm:text-5xl font-bold">
+        <h1 className="text-2xl sm:text-3xl font-bold">
           Hey, I am Karan Gosal 👋
         </h1>
 
