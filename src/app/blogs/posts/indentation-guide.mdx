@@ -1,0 +1,265 @@
+---
+title: "Indentation and Styling Guide"
+date: "2023-10-25"
+lastUpdated: "2025-05-13"
+description: "A concise guide on indentation styles for JavaScript, HTML, Django, and Python."
+---
+
+Indentation is more than just a matter of aesthetics in coding; in some languages like Python, it holds a semantic value. It’s a fundamental part of how code is structured and readable. It helps to organize your code, making it easier to understand and maintain.
+
+In this blog post, we will explore the basic indentation rules for four popular programming languages: JavaScript, HTML, Django, and Python.
+
+Let’s dive into the styles and indentation, cutting down on lengthy paragraphs and focusing on essential information only.
+
+## JavaScript
+
+JavaScript is a versatile language used for both frontend and backend development. Proper indentation is crucial for writing clean and maintainable code.
+
+### 1. Use Consistent Indentation
+
+Always use spaces or tabs consistently throughout your code. At ARCsoft, we prefer two spaces for the indentation of JS.
+
+### 2. Indent Control Structures
+
+```js
+if (condition) {
+  // Indented code block
+  statement1;
+  statement2;
+} else {
+  // Indented code block
+  statement3;
+}
+```
+
+### 3. Keep Function Definitions Clean
+
+```js
+// Regular Function
+function calculateDiscount(price, discountRate) {
+  const discountedPrice = price - (price * (discountRate / 100));
+  return discountedPrice;
+}
+
+// Arrow Function
+const calculateDiscountArrow = (price, discountRate) => {
+  const discountedPrice = price - (price * (discountRate / 100));
+  return discountedPrice;
+};
+```
+
+### 4. Semicolons, Line Length, Variable Naming, Variables
+
+Use semicolons to terminate statements. Limit lines to around 80-100 characters.
+
+```js
+const PI = 3.14159;
+let myVariable = "value";
+```
+
+### 5. Use === for Equality
+
+```js
+1 === 1 // true
+1 == 1  // true
+
+"1" === 1 // false
+"1" == 1  // true
+```
+
+### 6. Comments
+
+```js
+// This works
+
+/* This is fine, too. */
+
+/*
+ * I love this
+ * for multi-line.
+ */
+```
+
+### 7. Error Handling
+
+```js
+try {
+  const result = someFunction();
+} catch (error) {
+  console.error("An error occurred:", error.message);
+}
+```
+
+## HTML
+
+### 1. Use Lowercase Tags and Attributes
+
+```html
+<html>
+  <head>
+    <title>My Page</title>
+  </head>
+  <body>
+    <h1>Welcome to My Page</h1>
+    <p>This is a paragraph.</p>
+  </body>
+</html>
+```
+
+### 2. Consistent Tag Nesting
+
+```html
+<div>
+  <p>This is a paragraph.</p>
+</div>
+<ul>
+  <li>Item 1</li>
+  <li>Item 2</li>
+</ul>
+```
+
+### 3. Attribute Order
+
+```html
+<a class="btn" id="link" href="#">Moosetape</a>
+```
+
+### 4. Quote Attribute Values
+
+```html
+<img src="never.jpg" alt="fold">
+<input type="text" placeholder="Never Backdown">
+```
+
+## Django
+
+### 1. Indentation
+
+Use two spaces for each level, same as HTML.
+
+### 2. Using Template Tags
+
+```django
+<ul>
+{% for item in items %}
+  <li>{{ item.name }}</li>
+{% endfor %}
+</ul>
+```
+
+### 3. Template Tag Attributes
+
+```django
+<a class="btn btn-primary" href="{% url 'my_view' %}" data-my-attribute="{{ my_variable }}">My View</a>
+```
+
+### 4. Block Tags
+
+```django
+{% block content %}
+  <h1>Main Content</h1>
+{% endblock %}
+```
+
+### 5. Inclusion Tags
+
+```django
+<div class="sidebar">
+  {% include 'sidebar.html' %}
+</div>
+```
+
+### 6. Filters
+
+```django
+<p>{{ my_variable|filter_name }}</p>
+```
+
+### 7. Comments
+
+```django
+{# This is a comment in a Django template #}
+
+{% comment %}
+  This is a multiline comment in Django.
+{% endcomment %}
+```
+
+## Python
+
+Python is known for its readability, and indentation plays a pivotal role in its syntax.
+
+### 1. Indentation
+
+Use four spaces for each level of indentation.
+
+```python
+def example_function():
+    for i in range(5):
+        if i % 2 == 0:
+            print("Even")
+        else:
+            print("Odd")
+```
+
+### 2. Whitespace
+
+```python
+total = 3 + 4
+name = "Moose"
+```
+
+### 3. Maximum Line Length
+
+```python
+def long_function_with_a_reasonably_long_name(param1, param2, param3, param4):
+    pass
+```
+
+### 4. Imports
+
+```python
+import os
+import sys
+
+from math import sqrt
+
+import my_module
+```
+
+### 5. Naming Conventions
+
+```python
+user_age = 30
+
+def calculate_total(x, y):
+    return x + y
+
+class MyClass:
+    pass
+
+MAX_VALUE = 100
+```
+
+### 6. Comments and Docstrings
+
+```python
+def divide(x, y):
+    # Check for division by zero
+    if y == 0:
+        raise ValueError("Division by zero is not allowed")
+    return x / y
+```
+
+## Conclusion
+
+Proper indentation is a universal coding practice that enhances code readability and maintainability. By following these basic indentation rules, you’ll make your code more accessible to others and your future self.
+
+## Documentation
+
+- JavaScript Docs by Mozilla
+- JavaScript Docs by Google
+- HTML
+- Django
+- Python Docs
+- PEP 8

@@ -29,16 +29,20 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const { content, data } = matter(fileContent);
 
   return (
-    <section className="w-[90%] sm:w-[50%] mx-auto">
-      <article className="prose dark:prose-invert mx-auto py-10">
+    <section className="w-[90%] sm:w-[50%] max-w-6xl mx-auto flex flex-col items-start justify-center space-y-6 px-8 pt-[40px]">
+      <article className="prose dark:prose-invert max-w-full">
         {/* Blog title */}
         <h1 className="font-semibold text-3xl tracking-tight">
           {data.title}
         </h1>
 
-        {/* Date + read time */}
+        {/* Date */}
         <div className="mt-2 mb-8 text-sm text-neutral-600 dark:text-neutral-400">
-          {data.date} · {data.readTime}
+          {new Date(data.date).toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric",
+          })}
         </div>
 
         {/* Custom blockquote */}
@@ -60,8 +64,10 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           </p>
         </blockquote>
 
-        {/* MDX content */}
-        <MDXRemote source={content} />
+        {/* Blog content */}
+        <div className="pt-6">
+          <MDXRemote source={content} />
+        </div>
       </article>
     </section>
   );
