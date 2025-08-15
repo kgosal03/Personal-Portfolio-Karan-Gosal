@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Github, Linkedin, Mail } from "lucide-react"
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 
 export default function Home() {
   return (
@@ -41,14 +42,25 @@ export default function Home() {
           </a>
         </div>
 
+        {/* Big Avatar */}
+        <Avatar className="w-48 h-48 border-4 border-border shadow-lg mx-auto">
+          <AvatarImage
+            src="/karan.png"
+            alt="Karan Gosal"
+            className="object-cover"
+          />
+          <AvatarFallback>KG</AvatarFallback>
+        </Avatar>
+
         {/* Description */}
         <p className=" text-lg text-gray-600 dark:text-gray-300">
           I’m a Software Engineering student at the University of Victoria,
-          specializing in Artificial Intelligence and Machine Learning. From
-          the start, I’ve been fascinated by how technology can solve real
-          problems and drive change. Through hands-on experience in full-stack
-          development, performance optimization, and automated testing, I’ve
-          built skills that help me create scalable, efficient solutions.
+          specializing in Artificial Intelligence and Machine Learning,
+          graduating in December 2025. From the start, I’ve been fascinated
+          by how technology can solve real problems and drive change. Through
+          hands-on experience in full-stack development, performance optimization,
+          and automated testing, I’ve built skills that help me create scalable,
+          efficient solutions.
           <br /><br />
           What really motivates me is continuous learning and tackling complex
           challenges head-on. I’m passionate about collaborating with others and
