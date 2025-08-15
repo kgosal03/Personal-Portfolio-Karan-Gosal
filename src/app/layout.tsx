@@ -26,8 +26,8 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           
           {/* NAVIGATION BAR */}
-          <nav className="w-full flex justify-center border-b border-border">
-            <div className="flex items-center justify-between w-[80%] max-w-6xl px-4 py-3">
+          <nav className="w-full border-b border-border">
+            <div className="flex items-center justify-between w-[90%] sm:w-[60%] max-w-6xl mx-auto px-4 py-3">
               
               {/* Left: Links */}
               <NavigationMenu>
