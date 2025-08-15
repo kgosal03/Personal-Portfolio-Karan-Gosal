@@ -27,7 +27,7 @@ export default function RootLayout({
           
           {/* NAVIGATION BAR */}
           <nav className="w-full border-b border-border">
-            <div className="flex items-center justify-between w-[90%] sm:w-[60%] max-w-6xl mx-auto px-4 py-3">
+            <div className="flex items-center justify-between w-[90%] sm:w-[50%] max-w-6xl mx-auto px-4 py-3">
               
               {/* Left: Links */}
               <NavigationMenu>
@@ -59,7 +59,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           {/* FOOTER */}
           <footer className="w-full border-t border-border mt-8">
-            <div className="w-[90%] sm:w-[60%] max-w-6xl mx-auto px-4 py-4 flex justify-between items-center text-sm text-muted-foreground">
+            <div className="w-[90%] sm:w-[50%] max-w-6xl mx-auto px-4 py-4 flex justify-between items-center text-sm text-muted-foreground">
               <span>© {new Date().getFullYear()} Karan Gosal. All rights reserved.</span>
               <div className="flex space-x-4">
                 <Link

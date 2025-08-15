@@ -6,7 +6,7 @@ import { projects } from "@/data/projects"
 
 export default function Projects() {
   return (
-    <main className="flex flex-col items-start justify-start min-h-screen w-[90%] sm:w-[60%] mx-auto px-8 py-10">
+    <main className="flex flex-col items-start justify-start min-h-screen w-[90%] sm:w-[50%] mx-auto px-8 py-10">
       <h1 className="text-3xl font-bold mb-6">Projects</h1>
 
       <div className="grid gap-6 w-full justify-start"
