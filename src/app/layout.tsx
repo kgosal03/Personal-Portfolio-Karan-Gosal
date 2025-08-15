@@ -57,6 +57,30 @@ export default function RootLayout({
 
           {/* Page Content */}
           <main className="flex-1">{children}</main>
+          {/* FOOTER */}
+          <footer className="w-full border-t border-border mt-8">
+            <div className="w-[90%] sm:w-[60%] max-w-6xl mx-auto px-4 py-4 flex justify-between items-center text-sm text-muted-foreground">
+              <span>© {new Date().getFullYear()} Karan Gosal. All rights reserved.</span>
+              <div className="flex space-x-4">
+                <Link
+                  href="https://github.com/kgosal03"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  GitHub
+                </Link>
+                <Link
+                  href="https://linkedin.com/in/kgosal03"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors"
+                >
+                  LinkedIn
+                </Link>
+              </div>
+            </div>
+          </footer>
         </ThemeProvider>
       </body>
     </html>
