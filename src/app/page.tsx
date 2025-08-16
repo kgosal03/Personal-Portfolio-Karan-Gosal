@@ -59,7 +59,7 @@ export default function Home() {
           graduating in <b>December 2025</b>. From the start, I’ve been fascinated
           by how technology can <b>solve real problems</b> and <b>drive change</b>. 
           Through hands-on experience in <b>full-stack development</b>, 
-          <b>performance optimization</b>, and <b>automated testing</b>, 
+          <b> performance optimization</b>, and <b>automated testing</b>, 
           I’ve built skills that help me create <b>scalable, efficient solutions</b>.
           <br /><br />
           What really motivates me is <b>continuous learning</b> and tackling 
