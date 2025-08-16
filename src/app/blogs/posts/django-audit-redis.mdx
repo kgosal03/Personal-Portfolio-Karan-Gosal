@@ -1,0 +1,287 @@
+---
+title: "Enhancing Django Applications with Django Easy Audit and Redis Caching"
+date: "2024-02-29"
+readTime: "14 min read"
+description: A practical guide to strengthening Django applications with audit logging and caching. Learn how to implement Django Easy Audit for tracking user actions, requests, and CRUD events, and integrate Redis as a high-performance caching backend to boost speed and scalability. Includes setup steps, configuration examples, and an alternative look at Django Auditlog for better performance in complex apps.
+slug: "django-audit-redis"
+---
+
+In today’s digital landscape, where security and performance are paramount concerns, developers strive to implement robust solutions to monitor activities within their applications while optimizing performance. Django, a high-level Python web framework, offers a great set of tools and packages to assist developers in achieving these goals. In this blog post, we will explore a powerful Django package: [**Django Easy Audit**](https://pypi.org/project/django-easy-audit/) for logging and integration of Django applications with [**Redis**](https://pypi.org/project/redis/) for caching.
+
+Django Easy Audit
+-----------------
+
+### What is Audit Logging?
+
+Audit Logging involves documenting activity within the software systems, which in our case, is the web application. These logs capture events, their timestamps, the individuals or services involved, and the affected entities. Recording and monitoring request logs, user authorization logs, or any CRUD events on the objects in a web application is crucial for security and performance. Request logs provide insight into incoming requests while user authorization logs track authentication and access events, helping to safeguard user accounts and sensitive data. By monitoring these logs, administrators can easily identify and respond to potential security breaches, unauthorized access attempts ensuring the overall reliability and integrity of the application. For our project at RCS, we primarily use it for tracking changes in records in case an error is introduced.
+
+### Auditing Logs with Django Easy Audit
+
+Maintaining a comprehensive log of user actions is crucial for security, compliance, and troubleshooting purposes. [**Django Easy Audit**](https://pypi.org/project/django-easy-audit/) simplifies the process of logging activities within Django applications. It seamlessly integrates with Django models and the built-in Django admin panel for presentation of the logs, allowing administrators to effortlessly track changes to database records.
+
+Features that Django Easy Audit provides:
+
+*   View logged requests.
+*   Track user login and logout times.
+*   Filter logs based on various conditions.
+*   Record any CRUD operations performed on objects.
+*   Export logs as CSV files.
+
+### Install and Configure Django Easy Audit
+
+*   **Download and install**
+    
+    *   Using pip:
+        ```
+
+        pip install django-easy-audit
+        ```
+            
+        
+    *   Alternatively, we can download the latest release from [GitHub](https://github.com/soynatan/django-easy-audit):
+        
+        1.  Navigate to the GitHub repository for Django Easy Audit.
+        2.  Download the latest release.
+        3.  Unzip the downloaded file.
+        4.  Place the folder named ’easyaudit’ in the root directory of our Django project.
+*   **Configuration**
+    
+    *   Add ```’easyaudit’``` to the ```INSTALLED\_APPS``` in the project’s settings file:
+        
+            ```
+
+            INSTALLED_APPS = [
+            ...
+            'easyaudit',
+            ]
+            ```
+            
+        
+    *   Add Easy Audit’s middleware to the MIDDLEWARE setting:
+
+            ```
+
+            MIDDLEWARE = (
+            ...
+            'easyaudit.middleware.easyaudit.EasyAuditMiddleware',
+            )
+            ```
+            
+        
+    *   Run the following command to create the app’s models:
+        
+            ```
+            
+            python manage.py migrate easyaudit
+            ```
+            
+        
+    
+    **Important**: Make sure that the desired models, for which we want to log events, are registered in the `admin.py` of our project. We can also choose which models to record events for by adding or removing them from this file. To illustrate, we can use two dummy models Model1 and Model2, import these into the `admin.py` file and then add the following lines of code to register these with the admin.
+    
+        ```
+
+        from app.models import (Model1, Model2)
+    
+        admin.site.register(Model1)
+        admin.site.register(Model2)
+        ```
+        
+    
+
+That’s it! With these configurations, every CRUD event within the project will be logged in the audit models. We can query these logs from the Django admin app. Additionally, authentication events and requested URLs will also be logged automatically.
+
+To see the logs, go to the Django Admin Panel of the app and log in.
+
+![Admin Panel](/django-redis/1.png)
+
+As shown in the above image, we can see the interface for the **Easy Audit Application**. It offers three separate links to see different events.
+
+*   CRUD Events: CRUD signifies Create, Read, Update, and Delete. Creating marks new additions, updating denotes modifications, and deleting signals removal of the django admin registered model objects from the system.
+    
+    ![CRUD Events](/django-redis/2.png)
+    
+*   Login Events - Tracks instances when users successfully log into and log out of the system, verifying their identity.
+    
+    ![Login Events](/django-redis/3.png)
+    
+*   Request Events - Tracks requests made by users or systems to access specific functionalities or resources within the application.
+    
+    ![Request Events](/django-redis/4.png)
+    
+    ![Filter](/django-redis/5.png)
+    
+
+Caching
+-------
+
+Caching involves storing frequently accessed data temporarily, typically in memory, to expedite subsequent requests for the same data without needing to regenerate it. In the context of database queries, caching stores the results of frequently executed queries, enabling faster retrieval of data or results without querying the database again. This mechanism significantly reduces response time and improves system performance, contributing to a smoother user experience. [Django offers built-in support for caching](https://docs.djangoproject.com/en/5.0/topics/cache/#), providing developers with the tools to cache entire views, individual template fragments, or arbitrary Python objects.
+
+### Caching in Django
+
+Common methods are:
+
+#### Per-View Cache with Django
+
+Django provides a granular approach to caching with the `cache_page` decorator. This decorator allows us to cache the output of individual views effortlessly. For example, by using `cache_page(60 * 5)`, we can cache the result of a view for 5 minutes. This per-view cache is keyed off the URL, ensuring that each URL is cached separately, but subsequent requests to the same URL utilize the cache.
+
+    ```
+
+    from django.views.decorators.cache import cache_page
+
+
+    @cache_page(60 * 5)
+    def my_view(request): ...
+    ```
+    
+
+#### Specifying Cache in URLconf
+
+To decouple views from the caching system, Django allows developers to specify cache settings directly in the URLconf. By wrapping view functions with `cache_page` when referring to them in the URLconf, developers can achieve greater flexibility. This approach ensures that views can be reused on cache-less sites or distributed to others without being cached.
+
+    ```
+
+    from django.views.decorators.cache import cache_page
+
+    urlpatterns = [
+        path("car/<int:code>/", cache_page(60 * 5)(my_view)),
+    ]
+    ```
+    
+
+#### Template Fragment Caching
+
+For finer-grained control over caching, Django provides the `{% cache %}` template tag for caching template fragments. This tag allows us to cache specific blocks of content within templates, specifying cache timeouts and unique cache keys. Template fragment caching is useful for optimizing the performance of dynamic web pages.
+
+    ```
+
+    {% load cache %}
+    {% cache 600 navbar %}
+        .. navbar ..
+    {% endcache %}
+    ```
+    
+
+Sometimes, we need multiple copies of the same thing based on the user.
+
+    ```
+
+    {% load cache %}
+    {% cache 600 navbar request.user.username %}
+        .. navbar for logged in user ..
+    {% endcache %}
+    ```
+    
+
+#### Low-Level Cache API
+
+For cases where full-page caching is not suitable, Django exposes a low-level cache API. This API enables us to cache Python objects with any level of granularity. By accessing the cache through `django.core.cache.caches`, we can store and retrieve cached objects efficiently.
+
+    ```
+
+    from django.core.cache import cache
+    from myapp.models import MyModel
+
+    # Define a function to retrieve queryset and cache the results
+    def get_cached_queryset():
+        # Check if the queryset results are already cached
+        cached_queryset = cache.get('cached_queryset')
+        
+        if cached_queryset is None:
+            # If queryset results are not cached, perform expensive queryset operations
+            queryset = MyModel.objects.filter(some_condition=True)
+            
+            # Cache the queryset results for 60 seconds
+            cache.set('cached_queryset', queryset, timeout=60)
+            
+            # Return the queryset
+            return queryset
+        else:
+            # If queryset results are cached, return them directly from the cache
+            return cached_queryset
+
+    # Call the function to get queryset results
+    my_queryset = get_cached_queryset()
+    ```
+    
+
+**Important**: Using caching in Django can make our website faster. However, it is important to regularly check and update these stored pieces of information to make sure they are still accurate. Otherwise, our website might show outdated information to users.
+
+### Why use Redis?
+
+While Django’s built-in caching mechanisms are effective for many scenarios, they may fall short in highly dynamic or distributed environments. This is where Redis shines. [Redis](https://redis.io/) is an open-source, in-memory data structure store known for its speed, versatility, and support for advanced data types. Its key-value store architecture makes it ideal for caching, session storage, and real-time data processing.
+
+### Setting Up Redis for Caching in Django
+
+Integrating [Redis](https://pypi.org/project/redis/) with Django is straightforward.
+
+*   **Download and Install as a Container**
+    
+    *   Pull the official Redis Docker image from Docker Hub:
+        
+            ```
+
+            docker pull redis
+            ```
+            
+        
+    *   Run a Redis container with port forwarding from container’s port 6379 to localhost’s port 6379:
+        
+            ```
+
+            docker run --name my-redis-container -d -p 6379:6379 redis
+            ```
+            
+        
+    *   We can interact with Redis using the Redis CLI:
+        
+            ```
+
+            redis-cli -h localhost -p 6379
+            ```
+            
+        
+*   **Configuration**
+    
+    *   Now, configure Django to use Redis as the caching backend. Update CACHES settings in `settings.py`:
+        
+            ```
+
+            CACHES = {
+                "default": {
+                    "BACKEND": "django.core.cache.backends.redis.RedisCache",
+                    # The location might be different depending upon how we use it
+                    "LOCATION": "redis://0.0.0.0:6379",
+                }
+            }
+            ```
+            
+        
+
+Final Thoughts
+--------------
+
+Integrating Django Easy Audit or Auditlog and Redis caching into our Django projects can significantly improve both security and performance aspects. While auditing alone doesn’t directly enhance security, it plays a crucial role in providing insight into data activities, ensuring integrity, and aiding in the detection and recovery from security events. Django Easy Audit and Auditlog simplifies the process of logging user activities, while Redis caching optimizes the responsiveness of our application by efficiently storing and retrieving frequently accessed data or results. By incorporating these powerful tools into our development workflow, we can build Django applications that not only deliver exceptional user experiences but also uphold the highest standards of security and efficiency. Cheers to building better, stronger Django applications with Django Easy Audit and Redis! 🚀
+
+Bonus - Easy Audit Alternative: Django Auditlog for Better Performance
+----------------------------------------------------------------------
+
+Since we initially added Django Easy Audit to our application, it significantly slowed down processes that involved bulk changes to models, such as create, update, or delete operations. It doubled the time required for these processes. Therefore, we opted for another logging tool called [Django Auditlog](https://django-auditlog.readthedocs.io/en/latest/).
+
+One limitation common to all these tools is their inability to record delete events when there is a cascade delete set on the models. Auditlog has addressed this issue, but the new version has not been released yet. However, I was able to make those changes myself by observing the code changes they made to fix that issue in their [repository](https://github.com/jazzband/django-auditlog) for the new version.
+
+Django Auditlog, also known as Auditlog, is a highly efficient and user-friendly tool designed for logging object changes in Django applications. With a focus on simplicity and speed, Auditlog efficiently tracks modifications to models, capturing essential details such as the user responsible for the changes. Unlike other solutions, Auditlog avoids excessive database storage and performance overheads, offering a flexible alternative to Django’s built-in admin log. By saving change summaries in JSON format, it ensures easy tracking of alterations, enhancing the overall auditing process for Django projects. For [installation](https://django-auditlog.readthedocs.io/en/latest/installation.html), it is pretty much the same as Easy Audit.
+
+So, I can say it depends on the Django application which tool we want to choose. If we have a simple application that occasionally changes the models and changes are not a lot, then Easy Audit would be a choice as it offers other functions like downloads as CSV and some extra filter options. But if we have a complex application, we should go with Auditlog as it is great in terms of performance.
+
+References
+----------
+
+*   [Django Easy Audit Pypi](https://pypi.org/project/django-easy-audit/)
+*   [Django Easy Audit GitHub](https://github.com/soynatan/django-easy-audit)
+*   [Redis Pypi](https://pypi.org/project/redis/)
+*   [Redis Official Website](https://redis.io/)
+*   [Django Official Caching Docs](https://docs.djangoproject.com/en/5.0/topics/cache/#)
+*   [Django Auditlog](https://django-auditlog.readthedocs.io/en/latest/)
+*   [Django Auditlog Repository](https://github.com/jazzband/django-auditlog)
+*   [Django Auditlog Installation](https://django-auditlog.readthedocs.io/en/latest/installation.html)

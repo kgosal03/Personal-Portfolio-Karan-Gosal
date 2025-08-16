@@ -72,7 +72,7 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 ```
 
-![Showing Map](/1-leaflet.png)
+![Showing Map](/leaflet/1-leaflet.png)
 
 Enhancing Our Leaflet Map: Markers, Circles, and Polygons
 ---------------------------------------------------------
@@ -88,7 +88,7 @@ Let’s start by adding a marker to our map.
 let marker = L.marker([48.4626, -123.312]).addTo(map);
 ``` 
 
-![Marker on Map](/2-leaflet.png)
+![Marker on Map](/leaflet/2-leaflet.png)
 
 ### Circle
 
@@ -102,7 +102,7 @@ let circle = L.circle([48.4626, -123.312], {
     radius: 50
 }).addTo(map);
 ```
-![Circle on Map](/3-leaflet.png)
+![Circle on Map](/leaflet/3-leaflet.png)
 
 ### Polygon
 
@@ -117,7 +117,7 @@ let polygon = L.polygon([
 ]).addTo(map);
 ```
 
-![Polygon on Map](/4-leaflet.png)
+![Polygon on Map](/leaflet/4-leaflet.png)
 
 Popups with Leaflet
 -------------------
@@ -137,7 +137,7 @@ marker.bindPopup("<b>Hello world!</b><br>This is University of Victoria.").openP
 
 Simply clicking on these objects reveals the attached popups. The **bindPopup()** method efficiently attaches a popup with specified HTML content to the object. The openPopup method ensures that the attached popup immediately opens as the map loads.
 
-![Popups on Map](/5-leaflet.png)
+![Popups on Map](/leaflet/5-leaflet.png)
 
 ### Popups as Standalone Layers
 
@@ -151,7 +151,7 @@ let popup = L.popup()
     .openOn(map);
 ```
 
-![Standalone Popup Map](/6-leaflet.png)
+![Standalone Popup Map](/leaflet/6-leaflet.png)
 
 Handling Events with Leaflet
 ----------------------------
@@ -184,7 +184,7 @@ map.on('click', onMapClick);
 ```
     
 
-![Events Map](/7-leaflet.png)
+![Events Map](/leaflet/7-leaflet.png)
 
 Map Clustering with Leaflet
 ---------------------------
@@ -209,7 +209,7 @@ L.marker([48.4626, -123.312]).addTo(map);
 L.marker([48.4626, -123.320]).addTo(map);
 ```  
 
-![Before Clustering](/8-leaflet.png)
+![Before Clustering](/leaflet/8-leaflet.png)
 
 After integrating the plugin, we can modify our code to include clustering. Markers are grouped into clusters based on the zoom level.
 
@@ -229,7 +229,7 @@ markers.addLayer(marker2);
 map.addLayer(markers);
 ```    
 
-![After Clustering](/9-leaflet.png)
+![After Clustering](/leaflet/9-leaflet.png)
 
 Final Thoughts
 --------------
