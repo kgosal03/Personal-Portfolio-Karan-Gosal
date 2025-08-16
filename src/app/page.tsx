@@ -52,27 +52,114 @@ export default function Home() {
         </Avatar>
 
         {/* Description */}
-        <p className=" text-lg font-light text-black dark:text-gray-300">
-          I’m a Software Engineering student at the University of Victoria,
-          specializing in Artificial Intelligence and Machine Learning,
-          graduating in December 2025. From the start, I’ve been fascinated
-          by how technology can solve real problems and drive change. Through
-          hands-on experience in full-stack development, performance optimization,
-          and automated testing, I’ve built skills that help me create scalable,
-          efficient solutions.
+        <p className="text-lg font-light text-black dark:text-gray-300">
+          I’m a Software Engineering student at the <b>University of Victoria</b>,
+          specializing in <b>Artificial Intelligence</b> and <b>Machine Learning</b>,
+          graduating in <b>December 2025</b>. From the start, I’ve been fascinated
+          by how technology can <b>solve real problems</b> and <b>drive change</b>. 
+          Through hands-on experience in <b>full-stack development</b>, 
+          <b>performance optimization</b>, and <b>automated testing</b>, 
+          I’ve built skills that help me create <b>scalable, efficient solutions</b>.
           <br /><br />
-          What really motivates me is continuous learning and tackling complex
-          challenges head-on. I’m passionate about collaborating with others and
-          contributing to projects that make a real impact. I’m excited to grow
-          my career by working with innovative teams and pushing the boundaries
-          of what technology can do.
+          What really motivates me is <b>continuous learning</b> and tackling 
+          <b>complex challenges</b> head-on. I’m passionate about 
+          <b>collaborating with others</b> and contributing to projects that 
+          <b>make a real impact</b>. I’m excited to grow my career by working 
+          with <b>innovative teams</b> and pushing the boundaries of what 
+          <b>technology can do</b>.
         </p>
+        {/* Divider */}
+        <div className="my-8 w-full border-t-2"></div>
+
+        {/* Education Section */}
+        <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2 mt-8">
+         Education
+        </h1>
+        <div className="space-y-6 w-full">
+          {/* Education Item */}
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-4">
+              <img
+                src="/work-education/uvic.png"
+                alt="University of Victoria"
+                className="w-14 h-14 rounded-lg object-contain border"
+              />
+              <div>
+                <div className="font-semibold">Bachelor of Software Engineering</div>
+                <div className="text-muted-foreground">University of Victoria</div>
+              </div>
+            </div>
+            <div className="text-sm text-muted-foreground">Sep 2021 – Dec 2025</div>
+          </div>
+        </div>
+    
+
+        {/* Work Section */}
+        <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+         Work
+        </h1>
+        <div className="space-y-6 w-full">
+          {/* Rivos */}
+          <div className="flex items-center justify-between w-full">
+            {/* Left: Image + Details */}
+            <div className="flex items-center gap-4">
+              <img
+                src="/work-education/rivos.png"
+                alt="rivos"
+                className="w-14 h-14 rounded-lg object-contain border"
+              />
+              <div>
+                <div className="font-semibold">AI Software Engineer Co-op</div>
+                <div className="text-muted-foreground">Rivos Inc.</div>
+              </div>
+            </div>
+            {/* Right: Time Period */}
+            <div className="text-sm text-muted-foreground">Sept 2025 – Dec 2025</div>
+          </div>
+
+          {/* UVic */}
+          <div className="flex items-center justify-between w-full">
+            {/* Left: Image + Details */}
+            <div className="flex items-center gap-4">
+              <img
+                src="/work-education/uvic.png"
+                alt="University of Victoria"
+                className="w-14 h-14 rounded-lg object-contain border"
+              />
+              <div>
+                <div className="font-semibold">Full-Stack Developer Co-op</div>
+                <div className="text-muted-foreground">Advanced Research Computing Dev Team, University Systems</div>
+              </div>
+            </div>
+            {/* Right: Time Period */}
+            <div className="text-sm text-muted-foreground">August 2023 – April 2024</div>
+          </div>
+
+          {/* VertiGIS */}
+          <div className="flex items-center justify-between w-full">
+            {/* Left: Image + Details */}
+            <div className="flex items-center gap-4">
+              <img
+                src="/work-education/vertigis.png"
+                alt="VertiGIS"
+                className="w-14 h-14 rounded-lg object-contain border"
+              />
+              <div>
+                <div className="font-semibold">Quality Assurance Analyst Co-op</div>
+                <div className="text-muted-foreground">VertiGIS</div>
+              </div>
+            </div>
+            {/* Right: Time Period */}
+            <div className="text-sm text-muted-foreground">May 2023 – August 2023</div>
+          </div>
+
+        </div>
 
         {/* Divider */}
         <div className="my-8 w-full border-t-2"></div>
 
         {/* Latest Blog Posts */}
-        <h1 className="text-xl sm:text-3xl font-bold">Latest Blog Posts</h1>
+        <h1 className="text-xl sm:text-2xl font-bold">Latest Blog Posts</h1>
         <div className="grid gap-6 w-full">
           {blogPosts.map((post) => (
             <Link
