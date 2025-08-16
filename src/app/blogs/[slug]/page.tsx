@@ -65,7 +65,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
         </blockquote>
 
         {/* Blog content */}
-        <div className="pt-6">
+        <div className="pt-6 prose dark:prose-invert">
           <MDXRemote source={content} />
         </div>
       </article>
