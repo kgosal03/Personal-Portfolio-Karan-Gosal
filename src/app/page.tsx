@@ -135,11 +135,11 @@ export default function Home() {
               />
               <div>
                 <div className="font-semibold">Full-Stack Developer Co-op</div>
-                <div className="text-muted-foreground">Advanced Research Computing Dev Team, University Systems</div>
+                <div className="text-muted-foreground">Advanced Research Computing Dev Team</div>
               </div>
             </div>
             {/* Right: Time Period */}
-            <div className="text-sm text-muted-foreground">August 2023 – April 2024</div>
+            <div className="text-sm text-muted-foreground">Aug 2023 – April 2024</div>
           </div>
 
           {/* VertiGIS */}
@@ -159,7 +159,7 @@ export default function Home() {
               </div>
             </div>
             {/* Right: Time Period */}
-            <div className="text-sm text-muted-foreground">May 2023 – August 2023</div>
+            <div className="text-sm text-muted-foreground">May 2023 – Aug 2023</div>
           </div>
 
         </div>
