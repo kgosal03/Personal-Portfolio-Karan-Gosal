@@ -15,10 +15,11 @@ export async function generateStaticParams() {
     }));
 }
 
-export default function BlogPage({ params }: { params: { slug: string } }) {
+export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const filePath = path.join(
     process.cwd(),
-    `src/app/blogs/posts/${params.slug}.mdx`
+    `src/app/blogs/posts/${slug}.mdx`
   );
 
   if (!fs.existsSync(filePath)) {

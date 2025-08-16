@@ -1,9 +1,11 @@
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Github, Linkedin, Mail } from "lucide-react"
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { Github, Linkedin, Mail } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Link from "next/link";
+import { getBlogPosts } from "@/lib/getBlogPosts"; // Make sure this returns sorted posts
 
 export default function Home() {
+  const blogPosts = getBlogPosts().slice(0, 4); // ✅ latest 4 posts
+
   return (
     <main className="flex justify-center pt-[40px]">
       <div className="w-[90%] sm:w-[50%] max-w-6xl mx-auto flex flex-col items-start justify-center space-y-6 px-8 text-left">
@@ -22,14 +24,12 @@ export default function Home() {
             className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
           >
             <Github className="w-5 h-5" />
-    
           </a>
           <a
             href="mailto:karangosal9779@email.com"
             className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
           >
             <Mail className="w-5 h-5" />
-
           </a>
           <a
             href="https://linkedin.com/in/kgosal03"
@@ -38,7 +38,6 @@ export default function Home() {
             className="flex items-center space-x-1 text-muted-foreground hover:text-foreground transition-colors"
           >
             <Linkedin className="w-5 h-5" />
-
           </a>
         </div>
 
@@ -68,15 +67,34 @@ export default function Home() {
           my career by working with innovative teams and pushing the boundaries
           of what technology can do.
         </p>
+
         {/* Divider */}
         <div className="my-8 w-full border-t-2"></div>
 
-        {/* Heading Blog Posts */}
-        <h1 className="text-xl sm:text-3xl font-bold">
-          Lastest Blog Posts
-        </h1>
+        {/* Latest Blog Posts */}
+        <h1 className="text-xl sm:text-3xl font-bold">Latest Blog Posts</h1>
+        <div className="grid gap-6 w-full">
+          {blogPosts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blogs/${post.slug}`}
+              className="block rounded-xl border bg-card text-card-foreground shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors"
+            >
+              <div className="flex flex-col space-y-1.5 p-6">
+                <div className="font-semibold leading-none tracking-tight">{post.title}</div>
+                <div className="text-sm text-muted-foreground tabular-nums">
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })} · {post.readTime}
+                </div>
+              </div>
+              <div className="p-6 pt-0 text-muted-foreground">{post.description}</div>
+            </Link>
+          ))}
+        </div>
       </div>
-
     </main>
-  )
+  );
 }
