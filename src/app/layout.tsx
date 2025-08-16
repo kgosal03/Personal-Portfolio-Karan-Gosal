@@ -9,6 +9,7 @@ import {
   NavigationMenuLink,
 } from "@/components/ui/navigation-menu"
 import Link from "next/link"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "Home",
@@ -29,27 +30,51 @@ export default function RootLayout({
           <nav className="w-full border-b border-border">
             <div className="flex items-center justify-between w-[90%] sm:w-[50%] max-w-6xl mx-auto px-4 py-3">
               
-              {/* Left: Links */}
-              <NavigationMenu>
-                <NavigationMenuList className="flex space-x-2">
-                  <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                      <Link href="/" className="px-4 py-2">Home</Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                      <Link href="/blogs" className="px-4 py-2">Blogs</Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                  <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                      <Link href="/projects" className="px-4 py-2">Projects</Link>
-                    </NavigationMenuLink>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
+              {/* Left: Logo + Links */}
+              <div className="flex items-center space-x-4">
+                {/* Logo / Icon that links to home */}
+                <Link href="/" className="flex items-center">
+                  <div className="relative w-12 h-8 dark:hidden">
+                    <Image
+                      src="/kg-white.png"
+                      alt="Logo"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+                  <div className="relative w-12 h-8 hidden dark:block">
+                    <Image
+                      src="/kg-dark.png"
+                      alt="Logo"
+                      fill
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+                </Link>
 
+                {/* Navigation Links */}
+                <NavigationMenu>
+                  <NavigationMenuList className="flex space-x-2">
+                    <NavigationMenuItem>
+                      <NavigationMenuLink asChild>
+                        <Link href="/" className="px-4 py-2">Home</Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <NavigationMenuLink asChild>
+                        <Link href="/blogs" className="px-4 py-2">Blogs</Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <NavigationMenuLink asChild>
+                        <Link href="/projects" className="px-4 py-2">Projects</Link>
+                      </NavigationMenuLink>
+                    </NavigationMenuItem>
+                  </NavigationMenuList>
+                </NavigationMenu>
+              </div>
               {/* Right: Dark Mode Toggle */}
               <ModeToggle />
             </div>
