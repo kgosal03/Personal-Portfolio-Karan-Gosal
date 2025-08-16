@@ -12,7 +12,7 @@ export const projects = [
     date: "Sept. 2025",
     tech: ["Python", "FastAPI", "Next.js", "LLaMA 3.1", "ChromaDB", "Docker"],
     description:
-      "Developed a Retrieval-Augmented Generation (RAG) AI assistant giving natural language access to 1.74 PB of oceanographic data, integrating BERT embeddings, semantic routing, and LLaMA models. Benchmarked at 96% accuracy, delivering transparent, cited insights for researchers, policymakers, and educators.",
+      "Developed a Retrieval-Augmented Generation (RAG) AI assistant giving natural language access to 1.74 PB of oceanographic data, integrating BERT embeddings, semantic routing, and LLaMA models. Benchmarked at 81% accuracy, delivering transparent, cited insights for researchers, policymakers, and educators.",
     sourceCode:
       "https://github.com/kgosal03/Ocean-Network-Canada-Assistant",
   },
