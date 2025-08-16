@@ -32,22 +32,7 @@ export default function Projects() {
 
             <CardContent>
               <p className="text-sm text-muted-foreground">
-                {project.description.includes("Mercari") && project.datasetLink ? (
-                  <>
-                    {project.description.split("Mercari")[0]}
-                    <a
-                      href={project.datasetLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline decoration-2"
-                    >
-                      Mercari
-                    </a>
-                    {project.description.split("Mercari")[1]}
-                  </>
-                ) : (
-                  project.description
-                )}
+                {project.description}
               </p>
             </CardContent>
 
