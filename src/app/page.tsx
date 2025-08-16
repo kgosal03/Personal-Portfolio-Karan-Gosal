@@ -83,7 +83,9 @@ export default function Home() {
               <Image
                 src="/work-education/uvic.png"
                 alt="University of Victoria"
-                className="w-14 h-14 rounded-lg object-contain border"
+                width={56}
+                height={56}
+                className="rounded-lg object-contain border"
               />
               <div>
                 <div className="font-semibold">Bachelor of Software Engineering</div>
@@ -107,7 +109,9 @@ export default function Home() {
               <Image
                 src="/work-education/rivos.png"
                 alt="rivos"
-                className="w-14 h-14 rounded-lg object-contain border"
+                width={56}
+                height={56}
+                className="rounded-lg object-contain border"
               />
               <div>
                 <div className="font-semibold">AI Software Engineer Co-op</div>
@@ -125,7 +129,9 @@ export default function Home() {
               <Image
                 src="/work-education/uvic.png"
                 alt="University of Victoria"
-                className="w-14 h-14 rounded-lg object-contain border"
+                width={56}
+                height={56}
+                className="rounded-lg object-contain border"
               />
               <div>
                 <div className="font-semibold">Full-Stack Developer Co-op</div>
@@ -143,7 +149,9 @@ export default function Home() {
               <Image
                 src="/work-education/vertigis.png"
                 alt="VertiGIS"
-                className="w-14 h-14 rounded-lg object-contain border"
+                width={56}
+                height={56}
+                className="rounded-lg object-contain border"
               />
               <div>
                 <div className="font-semibold">Quality Assurance Analyst Co-op</div>
