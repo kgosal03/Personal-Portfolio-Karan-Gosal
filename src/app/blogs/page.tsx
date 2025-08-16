@@ -24,7 +24,11 @@ export default function BlogsPage() {
             <div className="flex flex-col space-y-1.5 p-6">
               <div className="font-semibold leading-none tracking-tight">{post.title}</div>
               <div className="text-sm text-muted-foreground tabular-nums">
-                {post.date} · {post.readTime}
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
+                })} · {post.readTime}
               </div>
             </div>
             <div className="p-6 pt-0 text-muted-foreground">
