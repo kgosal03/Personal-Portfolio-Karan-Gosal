@@ -1,10 +1,10 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Link from "next/link";
-import { getBlogPosts } from "@/lib/getBlogPosts"; // Make sure this returns sorted posts
+import { getBlogPosts } from "@/lib/getBlogPosts";
 
 export default function Home() {
-  const blogPosts = getBlogPosts().slice(0, 4); // ✅ latest 4 posts
+  const blogPosts = getBlogPosts().slice(0, 2);
 
   return (
     <main className="flex justify-center pt-[40px]">

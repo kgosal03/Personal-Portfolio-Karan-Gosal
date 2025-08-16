@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import Link from "next/link";
 
 export async function generateStaticParams() {
   const postsDir = path.join(process.cwd(), "src/app/blogs/posts");
@@ -15,16 +16,36 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function BlogPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const filePath = path.join(
-    process.cwd(),
-    `src/app/blogs/posts/${slug}.mdx`
-  );
+export default async function BlogPage({ params }: { params: { slug: string } }) {
+  const { slug } = params;
 
-  if (!fs.existsSync(filePath)) {
-    notFound();
-  }
+  const postsDir = path.join(process.cwd(), "src/app/blogs/posts");
+  const files = fs.readdirSync(postsDir);
+
+  // Load all posts & sort by date
+  const posts = files
+    .filter((file) => file.endsWith(".mdx"))
+    .map((file) => {
+      const filePath = path.join(postsDir, file);
+      const fileContent = fs.readFileSync(filePath, "utf-8");
+      const { data } = matter(fileContent);
+
+      return {
+        slug: file.replace(/\.mdx$/, ""),
+        title: data.title,
+        date: data.date,
+      };
+    })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // ✅ Find current post index
+  const currentIndex = posts.findIndex((p) => p.slug === slug);
+  const prevPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
+  const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
+
+  // ✅ Load current post content
+  const filePath = path.join(postsDir, `${slug}.mdx`);
+  if (!fs.existsSync(filePath)) notFound();
 
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { content, data } = matter(fileContent);
@@ -41,39 +62,43 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
         <div className="mt-2 mb-8 text-sm text-neutral-600 dark:text-neutral-400">
           {(() => {
             const [year, month, day] = data.date.split("-");
-            return new Date(Number(year), Number(month) - 1, Number(day))
-              .toLocaleDateString("en-US", {
+            return new Date(Number(year), Number(month) - 1, Number(day)).toLocaleDateString(
+              "en-US",
+              {
                 month: "long",
                 day: "numeric",
                 year: "numeric",
-              });
+              }
+            );
           })()}
         </div>
-
-        {/* Custom blockquote */}
-        <blockquote className="border-l-2 border-primary pl-4 italic text-muted-foreground">
-          <p>
-            <em>
-              This blog post was written during my co-op at the University of
-              Victoria in 2024. The views expressed here are my own and do not
-              necessarily reflect those of the University. See{" "}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://arcsoft.uvic.ca/log/"
-              >
-                here
-              </a>{" "}
-              for the original posts.
-            </em>
-          </p>
-        </blockquote>
 
         {/* Blog content */}
         <div className="pt-6 prose dark:prose-invert">
           <MDXRemote source={content} />
         </div>
       </article>
+
+      {/* Prev / Next navigation */}
+      <div className="flex justify-between w-full mt-12 border-t pt-6 text-sm">
+        {prevPost ? (
+          <Link
+            href={`/blogs/${prevPost.slug}`}
+            className="text-primary hover:underline"
+          >
+            ← {prevPost.title}
+          </Link>
+        ) : <span />}
+
+        {nextPost ? (
+          <Link
+            href={`/blogs/${nextPost.slug}`}
+            className="text-primary hover:underline"
+          >
+            {nextPost.title} →
+          </Link>
+        ) : <span />}
+      </div>
     </section>
   );
 }
