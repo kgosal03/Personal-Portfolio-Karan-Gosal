@@ -64,10 +64,10 @@ export default function Home() {
           <br /><br />
           What really motivates me is <b>continuous learning</b> and tackling 
           <b> complex challenges</b> head-on. I’m passionate about 
-          <b>collaborating with others</b> and contributing to projects that 
-          <b>make a real impact</b>. I’m excited to grow my career by working 
+          <b> collaborating with others</b> and contributing to projects that 
+          <b> make a real impact</b>. I’m excited to grow my career by working 
           with <b>innovative teams</b> and pushing the boundaries of what 
-          <b>technology can do</b>.
+          <b> technology can do</b>.
         </p>
         {/* Divider */}
         <div className="my-8 w-full border-t-2"></div>
