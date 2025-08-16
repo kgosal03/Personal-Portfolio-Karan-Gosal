@@ -38,11 +38,15 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
 
         {/* Date */}
         <div className="mt-2 mb-8 text-sm text-neutral-600 dark:text-neutral-400">
-          {new Date(data.date).toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
+          {(() => {
+            const [year, month, day] = data.date.split("-");
+            return new Date(Number(year), Number(month) - 1, Number(day))
+              .toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              });
+          })()}
         </div>
 
         {/* Custom blockquote */}
