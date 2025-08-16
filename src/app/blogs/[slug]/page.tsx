@@ -17,8 +17,12 @@ export async function generateStaticParams() {
     }));
 }
 
-export default async function BlogPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+type BlogPageProps = {
+  params: Promise<{ slug: string }>;
+};
+
+export default async function BlogPage({ params }: BlogPageProps) {
+  const { slug } = await params;
 
   const postsDir = path.join(process.cwd(), "src/app/blogs/posts");
   const files = fs.readdirSync(postsDir);
@@ -39,12 +43,12 @@ export default async function BlogPage({ params }: { params: { slug: string } })
     })
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-  // ✅ Find current post index
+  // Find current post index
   const currentIndex = posts.findIndex((p) => p.slug === slug);
   const prevPost = currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? posts[currentIndex - 1] : null;
 
-  // ✅ Load current post content
+  // Load current post content
   const filePath = path.join(postsDir, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) notFound();
 
@@ -73,6 +77,25 @@ export default async function BlogPage({ params }: { params: { slug: string } })
             );
           })()}
         </div>
+
+        {/* Custom blockquote */}
+        <blockquote className="border-l-2 border-primary pl-4 italic text-muted-foreground">
+          <p>
+            <em>
+              This blog post was written during my co-op at the University of
+              Victoria in 2024. The views expressed here are my own and do not
+              necessarily reflect those of the University. See{" "}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://arcsoft.uvic.ca/log/"
+              >
+                here
+              </a>{" "}
+              for the original posts.
+            </em>
+          </p>
+        </blockquote>
 
         {/* Blog content */}
         <div className="pt-6 prose dark:prose-invert">
