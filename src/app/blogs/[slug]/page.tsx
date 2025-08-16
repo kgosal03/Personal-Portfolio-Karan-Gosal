@@ -60,11 +60,11 @@ export default async function BlogPage({ params }: { params: Promise<{ slug: str
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://arcsoft.uvic.ca/log/2024-02-09-selenium-web-testing/"
+                href="https://arcsoft.uvic.ca/log/"
               >
                 here
               </a>{" "}
-              for the original post.
+              for the original posts.
             </em>
           </p>
         </blockquote>

@@ -163,6 +163,7 @@
   border-radius: 0.75rem; /* rounded-xl */
   padding: 1rem;
   overflow-x: auto;
+  margin-top: 1rem;
 }
 
 /* Dark mode glassy code blocks */
@@ -182,3 +183,12 @@
   background-color: rgba(255, 255, 255, 0.08);
 }
 
+/* only underline links inside markdown/MDX content */
+.prose a {
+  text-decoration: underline;
+}
+
+/* optional: make underline only on hover */
+.prose a:hover {
+  text-decoration: underline;
+}

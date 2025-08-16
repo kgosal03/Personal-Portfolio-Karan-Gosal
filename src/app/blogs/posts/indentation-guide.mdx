@@ -1,42 +1,47 @@
 ---
 title: "Indentation and Styling Guide"
-date: "2025-07-04"
+date: "2023-10-25"
 readTime: "8 min read"
-description: "A concise guide on indentation styles for JavaScript, HTML, Django, and Python."
+description: "A concise guide on indentation styles for JavaScript,
+HTML, Django, and Python."
 slug: "indentation-guide"
 ---
 
-Indentation is more than just a matter of aesthetics in coding; in some languages like Python, it holds a semantic value. It’s a fundamental part of how code is structured and readable. It helps to organize your code, making it easier to understand and maintain.
-
-In this blog post, we will explore the basic indentation rules for four popular programming languages: JavaScript, HTML, Django, and Python.
+Indentation is more than just a matter of aesthetics in coding; in some languages like Python, it holds a semantic value. It’s a fundamental part of how code is structured and readable. It helps to organize your code, making it easier to understand and maintain. In this blog post, we will explore the basic indentation rules for four popular programming languages: JavaScript, HTML, Django, and Python.
 
 Let’s dive into the styles and indentation, cutting down on lengthy paragraphs and focusing on essential information only.
 
-## JavaScript
+JavaScript
+----------
 
 JavaScript is a versatile language used for both frontend and backend development. Proper indentation is crucial for writing clean and maintainable code.
 
 ### 1. Use Consistent Indentation
 
-Always use spaces or tabs consistently throughout your code. At ARCsoft, we prefer two spaces for the indentation of JS.
+Always use spaces or tabs consistently throughout your code. At ARCsoft, we prefer **two spaces** for the indentation of JS as we find indentation of two spaces is sufficient for readability and requires fewer line breaks for longer lines.
 
 ### 2. Indent Control Structures
 
-```js
+Indent control structures (if statements, loops, function declarations) to make the code block clear and easy to follow.
+```
 
 if (condition) {
   // Indented code block
   statement1;
   statement2;
-} else {
+}
+else {
   // Indented code block
   statement3;
 }
-```
+```    
 
 ### 3. Keep Function Definitions Clean
 
-```js
+Indent the contents of a function or method consistently to enhance readability. You can use function expressions or arrow functions for defining functions.
+
+```
+
 // Regular Function
 function calculateDiscount(price, discountRate) {
   const discountedPrice = price - (price * (discountRate / 100));
@@ -52,51 +57,82 @@ const calculateDiscountArrow = (price, discountRate) => {
 
 ### 4. Semicolons, Line Length, Variable Naming, Variables
 
-Use semicolons to terminate statements. Limit lines to around 80-100 characters.
+Use semicolons to terminate statements. While some developers omit semicolons in JavaScript, it’s a good practice to include them to avoid unexpected issues.
 
-```js
-const PI = 3.14159;
-let myVariable = "value";
-```
+Limit lines to around 80-100 characters to ensure readability. Break long lines into multiple lines if necessary.
+
+Use camelCase convention with descriptive variable (e.g., myVariable, someItemName) and function names (e.g., calculateTotalPrice() ). Use UPPERCASE_SNAKE_CASE for constant values (e.g., const PI = 3.14159).
+
+As per ES6, **var** is not used anymore to prevent various errors. Declare all local variables with either **const** or **let**. Use const by default, unless a variable needs to be reassigned.
 
 ### 5. Use === for Equality
 
-```js
+Use strict equality (===) and inequality (!==) to compare values. In general, it’s recommended to use === (strict equality) because it avoids unexpected type coercion, leading to more predictable code. Using == (abstract equality) can sometimes result in subtle bugs, especially when working with different data types.
+
+```
+
 1 === 1 // true
 1 == 1  // true
 
-"1" === 1 // false
-"1" == 1  // true
+"1" === 1 // false (different types)
+"1" == 1  // true (string is coerced to a number)
+
+null === undefined // false (different types)
+null == undefined  // true (both are considered equal after coercion)
+
+false === 0 // false (different types)
+false == 0  // true (false is coerced to 0)
+
+true === 1 // false (different types)
+true == 1  // true (true is coerced to 1)
 ```
 
 ### 6. Comments
 
-```js
+Block comments are indented at the same level as the surrounding code. They may be in /* … */ or //-style. For multi-line /* … */ comments, subsequent lines must start with * aligned with the * on the previous line, to make comments obvious with no extra context.
+
+```
+
 // This works
 
 /* This is fine, too. */
 
 /*
- * I love this
- * for multi-line.
- */
-```
+  * I love this
+  * for multi-line.
+  */
+```   
 
 ### 7. Error Handling
 
-```js
-try {
-  const result = someFunction();
-} catch (error) {
-  console.error("An error occurred:", error.message);
-}
+Properly handle errors using try-catch blocks when necessary to prevent unexpected crashes.
+
 ```
 
-## HTML
+try {
+  // Code that might throw an error
+  const result = someFunction();
+} catch (error) {
+  // Handle the error gracefully
+  console.error("An error occurred:", error.message);
+}
+```   
+
+HTML
+----
+
+HTML is the standard markup language for Web pages. Let’s see the indentation styles.
 
 ### 1. Use Lowercase Tags and Attributes
 
-```html
+Always use lowercase for HTML tags and attributes. HTML is not case-sensitive, but lowercase is the convention. Using hyphens instead of underscores to separate the values of attribute like class or id as “nice-working-class”.
+
+### 2. Indentation
+
+At ARCsoft, we prefer to use **two spaces** for each level of indentation as we find indentation of two spaces is sufficient for readability when the nesting gets too complex.
+
+```
+
 <html>
   <head>
     <title>My Page</title>
@@ -106,11 +142,14 @@ try {
     <p>This is a paragraph.</p>
   </body>
 </html>
+```   
+
+### 3. Consistent Tag Nesting
+
+Maintain consistent tag nesting. This helps in understanding the structure of your document.
+
 ```
 
-### 2. Consistent Tag Nesting
-
-```html
 <div>
   <p>This is a paragraph.</p>
 </div>
@@ -118,150 +157,279 @@ try {
   <li>Item 1</li>
   <li>Item 2</li>
 </ul>
+```  
+
+### 4. Attribute Order
+
+If you have multiple attributes on a single tag, keep them in a consistent order. Recommended and common order goes like id, class, and then other attributes.
+
 ```
 
-### 3. Attribute Order
-
-```html
 <a class="btn" id="link" href="#">Moosetape</a>
+```  
+
+### 5. Quote Attribute Values
+
+Always enclose attribute values in double quotes. Double quotes are more common.
+
 ```
 
-### 4. Quote Attribute Values
-
-```html
 <img src="never.jpg" alt="fold">
 <input type="text" placeholder="Never Backdown">
+```  
+
+### 6. Comments
+
+Use comments to document your code.
+
 ```
 
-## Django
+<!-- This is a comment -->
+<div>
+  <p>This is a paragraph.</p>
+</div>
+
+<!--
+    This is a multi-line comment in HTML.
+    You can use it to add comments that span multiple lines.
+-->
+```   
+
+### 7. Naming Conventions
+
+Use meaningful names for classes and IDs to make your code more understandable.
+
+```
+
+<div class="header-container">
+  <h1 id="main-title">Welcome to My Page</h1>
+</div>
+```    
+
+Django
+------
+
+In Django, HTML templates are a crucial part of building web applications. Consistent indentation and style are essential to maintain readability and collaboration in your project.
 
 ### 1. Indentation
 
-Use two spaces for each level, same as HTML.
+At ARCsoft, we prefer to use **two spaces** for each level of indentation same as HTML.
 
 ### 2. Using Template Tags
 
-```django
+Django template tags are enclosed in ```{% %}```. Indent them consistently.
+
+```
+
 <ul>
 {% for item in items %}
   <li>{{ item.name }}</li>
 {% endfor %}
 </ul>
-```
+```   
 
 ### 3. Template Tag Attributes
 
-```django
-<a class="btn btn-primary" href="{% url 'my_view' %}" data-my-attribute="{{ my_variable }}">My View</a>
+When using attributes with template tags, use consistent spacing.
+
 ```
+
+<a class="btn btn-primary" href="{% url 'my_view' %}" data-my-attribute="{{ my_variable }}">My View</a>
+```  
 
 ### 4. Block Tags
 
-```django
+Django uses block tags to define content that can be overridden in child templates. Indent block tags to make it clear they are part of the template structure.
+
+```
+
 {% block content %}
   <h1>Main Content</h1>
 {% endblock %}
-```
+```  
 
 ### 5. Inclusion Tags
 
-```django
+If you’re including other templates within a template, use ```{% include ’template_name.html’ %}```. Indent the included template correctly.
+
+```
+
 <div class="sidebar">
   {% include 'sidebar.html' %}
 </div>
-```
+```   
 
 ### 6. Filters
 
-```django
-<p>{{ my_variable|filter_name }}</p>
+When applying filters to variables, write the variable name and the filter directly adjacent to each other without spaces.
+
 ```
+
+<p>{{ my_variable|filter_name }}</p>
+``` 
 
 ### 7. Comments
 
-```django
+Use Django-style comments for template-level comments. These are also helpful if you want to add a comment that will not be available to the HTML delivered to the client, where it could be viewed in the page source.
+
+```
+
 {# This is a comment in a Django template #}
 
 {% comment %}
   This is a multiline comment in Django.
+  It can span multiple lines and is not visible in the final output.
 {% endcomment %}
-```
+```   
 
-## Python
+Python
+------
 
 Python is known for its readability, and indentation plays a pivotal role in its syntax.
 
 ### 1. Indentation
 
-Use four spaces for each level of indentation.
+Use **four spaces** for each level of indentation. Do not use tabs. The primary reason to use four spaces in Python code is to maintain consistency with the widely accepted PEP 8 guideline. This ensures readability, promotes best practices, and enhances collaboration within the Python community, ultimately leading to more maintainable and industry-standard code.
 
-```python
+Indentation is crucial for defining block structures like loops, conditionals, and functions.
+
+```
+
+# Correct indentation
 def example_function():
     for i in range(5):
         if i % 2 == 0:
             print("Even")
         else:
             print("Odd")
-```
+```   
 
 ### 2. Whitespace
 
-```python
+Use a single space around binary operators like +, -, *, /, etc. **Avoid extraneous whitespace**, especially at the ends of lines.
+
+```
+
+# Good whitespace usage
 total = 3 + 4
 name = "Moose"
-```
+
+# Avoid unnecessary whitespace
+name   = "Pbx"
+```   
 
 ### 3. Maximum Line Length
 
-```python
+PEP 8 suggests a maximum line length of 79 characters for code and comments.
+
+For docstrings or comments, it’s 72 characters.
+
+```
+
+# Complying with line length
 def long_function_with_a_reasonably_long_name(param1, param2, param3, param4):
     pass
-```
+
+# Something comes up very often and this is how to indent 
+some_long_name_it_is_some_long = [item for
+    item in some_thing['name'] if not item[0][0].strip().startswith('car')
+]
+
+# Space inside only in case of comprehensions
+my_list = [1, 2, 3]       # correct
+other_list = [ 1, 2, 3 ]  # incorrect
+new_list = [ x for x in old_list ]  # correct
+new_list_2 = [x for x in old_list]  # incorrect
+
+# Docstring
+def example_function():
+    """
+    This is a docstring that provides information about the function.
+    It is longer than 72 characters, so it's wrapped to the next line.
+    """
+    pass
+```  
 
 ### 4. Imports
 
-```python
+Import standard libraries first, then third-party libraries, and finally your own modules.
+
+Separate import statements with a blank line.
+
+Avoid using wildcard imports (from module import *).
+
+```
+
+# Good import ordering
 import os
 import sys
 
 from math import sqrt
 
 import my_module
-```
+```   
 
 ### 5. Naming Conventions
 
-```python
-user_age = 30
+Use snake_case for variable and function names.
 
+Use CamelCase for class names.
+
+Use UPPER_CASE for constants.
+
+```
+
+# Variable and function names
+user_age = 30
 def calculate_total(x, y):
     return x + y
 
+# Class name
 class MyClass:
     pass
 
+# Constants
 MAX_VALUE = 100
-```
+```    
 
 ### 6. Comments and Docstrings
 
-```python
+Use comments to explain complex code or add context. Write docstrings to explain the purpose and usage of functions, classes and modules. The multi-line comment works the same as docstring.
+
+```
+
 def divide(x, y):
     # Check for division by zero
     if y == 0:
         raise ValueError("Division by zero is not allowed")
     return x / y
-```
 
-## Conclusion
+def my_function(param1, param2):
+    """
+    This is a docstring that provides a description of the function.
 
-Proper indentation is a universal coding practice that enhances code readability and maintainability. By following these basic indentation rules, you’ll make your code more accessible to others and your future self.
+    :param param1: Description of param1
+    :param param2: Description of param2
+    :return: Description of the return value
+    """
+    pass
+```   
 
-## Documentation
+Conclusion
+----------
 
-- JavaScript Docs by Mozilla
-- JavaScript Docs by Google
-- HTML
-- Django
-- Python Docs
-- PEP 8
+Proper indentation is a universal coding practice that enhances code readability and maintainability. In every programming language, consistent and logical indentation is essential for well-organized and error-free code. By following these basic indentation rules, you’ll not only make your code more accessible to others but also to your future self when you revisit your projects. Happy coding!
+
+Documentation
+-------------
+
+Here are the official documentation links for JavaScript, HTML, Django, and Python. These documentation sources provide valuable information and examples for programming and web development needs.
+
+1.  [JavaScript Docs by Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [JavaScript Docs by Google](https://google.github.io/styleguide/jsguide.html)
+    
+2.  [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+    
+3.  [Django](https://docs.djangoproject.com/en/4.2/)
+    
+4.  [Python Docs](https://docs.python.org/3/), [PEP 8](https://peps.python.org/pep-0008/)
+    
