@@ -92,7 +92,7 @@ export default function Home() {
                 <div className="text-muted-foreground">University of Victoria</div>
               </div>
             </div>
-            <div className="text-sm text-muted-foreground">Sep 2021 – Dec 2025</div>
+            <div className="text-sm text-muted-foreground">Sept 2021 – Dec 2025</div>
           </div>
         </div>
     
