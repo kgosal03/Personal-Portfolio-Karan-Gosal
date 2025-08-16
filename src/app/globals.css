@@ -193,3 +193,7 @@
 .prose img {
   margin-top: 1rem;
 }
+
+html {
+  scroll-behavior: smooth;
+}

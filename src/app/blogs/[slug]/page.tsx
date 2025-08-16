@@ -4,6 +4,7 @@ import matter from "gray-matter";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
+import BackToTopButton from "@/components/BackToTopButton";
 
 export async function generateStaticParams() {
   const postsDir = path.join(process.cwd(), "src/app/blogs/posts");
@@ -99,6 +100,8 @@ export default async function BlogPage({ params }: { params: { slug: string } })
           </Link>
         ) : <span />}
       </div>
+      {/* Back to top button */}
+      <BackToTopButton />
     </section>
   );
 }
