@@ -1,0 +1,204 @@
+---
+title: "Adding Custom Regions with Colours to the Leaflet Maps"
+date: "2024-03-19"
+readTime: "9 min read"
+description: A step-by-step guide to enhancing Leaflet maps by adding custom regions with unique colours and interactivity. Learn how to create GeoJSON data, style regions with dynamic palettes, and implement hover and click effects for more engaging, data-driven maps.
+slug: "django-audit-redis"
+---
+
+In our [previous exploration of Leaflet mapping](https://arcsoft.uvic.ca/log/2023-12-30-leaflet-maps-introduction/), we delved into the basics of creating a dynamic map, adding markers to it, and also clustering the marker groups. Building upon that foundation, let’s elevate our map’s visual appeal and informational depth by incorporating custom regions with distinct colours. This step-by-step guide will walk us through the process, from obtaining [GeoJSON data](https://doc.arcgis.com/en/arcgis-online/reference/geojson.htm) to adding regions to the map and interactive styling to our regions.
+
+Why Are Regions Important on a Map?
+-----------------------------------
+
+Maps serve as indispensable tools for navigating the world around us, providing vital information about locations, terrain, and spatial relationships. One key aspect of mapping that often goes unnoticed but holds immense significance is the regions. These spatial units play a crucial role in enhancing our understanding of geographic data and facilitating meaningful analysis. Here’s why regions are essential on a map:
+
+*   **Contextual Clarity**: Regions establish clear boundaries that help us make sense of the spatial layout depicted on the map. By defining distinct areas, they provide context and enable us to discern the relationships between different geographical features.
+    
+*   **Data Organization and Visualization**: Regions serve as efficient containers for aggregating data. By consolidating information within specific boundaries, maps become powerful tools for visualizing patterns and trends across different areas. Whether it’s demographic data, land use statistics, or natural resource distribution, regions allow us to represent complex information in a coherent and digestible manner.
+    
+*   **Comparative Insights**: Regions facilitate comparative analysis by offering a standardized framework for evaluating different geographic entities. Whether we’re examining population densities, economic indicators, or environmental conditions, regions enable us to make meaningful comparisons between various areas. This comparative approach enhances our understanding of spatial disparities and informs decision-making processes.
+    
+
+In the context of our web application, centered around zooarchaeological research, regions play a vital role in distinguishing which sites belong to specific geographic areas. This enhancement significantly improves the overall quality of our map, offering users greater context and clarity in their exploration.
+
+Creating and Getting GeoJSON Data
+---------------------------------
+
+[GeoJSON Data](https://doc.arcgis.com/en/arcgis-online/reference/geojson.htm) serves as the backbone for defining geographic features on our map. To begin, we need to acquire GeoJSON data representing the boundaries of our custom regions.
+
+### Creating GeoJSON Data
+
+The way I created the data for our website was by using [geojson.io](https://geojson.io/). We can utilize the power of this web application to mark locations on the map and obtain the desired coordinates in GeoJSON format.
+
+![GeoJSON Page](/leaflet-2/1.png)
+
+Before incorporating our newly generated GeoJSON data into our Leaflet map settings, we need to make some minor adjustments to ensure compatibility. Firstly, we will extract the data from the GeoJSON format and convert it into a partial GeoJSON within a JSON file.
+
+![Trimming](/leaflet-2/3.png)
+
+For the `properties` section, we will include additional fields: `name` and `popupContent`. These additions are crucial as they enable the display of the region’s name in the popup when clicked. Additionally, `popupContent` is optional, allowing us to include a description of the region if desired.
+
+![Properties Name](/leaflet-2/2.png)
+
+### Adding Data to our Web Application
+
+If the dataset is small, it can be directly added to the JavaScript of the web application. However, for larger datasets, such as regions worldwide, it’s preferable to store the data in a file. One approach, demonstrated below using Python, involves retrieving the data from a JSON file on the backend and passing it to the frontend as a context variable. The method may vary depending on the framework used for the application.
+
+    ```
+
+    # For the regions on the map
+    map_regions_file_path = f"{settings.BASE_DIR}/path/to/the/file/region_data.json"
+
+    try:
+        with open(map_regions_file_path, 'r', encoding='utf-8') as json_file:
+            regions_data = json.load(json_file)
+    except FileNotFoundError:
+        print('Error: File not found regions.json')
+    except json.JSONDecodeError:
+        print('Error: Invalid JSON format in the file regions.json')
+    except IOError as e:
+        print(f"IOError importing regions.json: {e}")
+    ```
+    
+
+Now, we can retrieve data in the frontend `script.js` file if external or in `<script></script>` if embedded.
+
+    ```
+
+    // Retrieve region data from the context
+    let dataForRegions = {{ data_for_regions|safe }};
+    let regionData = Array.from(dataForRegions);
+    ```
+    
+
+With our modified data prepared, we’re now ready to integrate it into our map.
+
+Adding Custom Coloured Regions to the Map
+-----------------------------------------
+
+The official documentation for adding a GeoJSON layer to a map can be found at [Leaflet GeoJSON](https://leafletjs.com/examples/geojson/). I will briefly discuss the setup process for integrating regions into the project.
+
+### Define Region Colours
+
+To ensure each region stands out distinctly, let’s assign a unique colour palette to them. By defining an array of colours, we will cycle through them as we create our layers. Assuming we have six regions to display.
+
+    ```
+
+    let colors = ['#FF5733', '#33FF57', '#5733FF', '#FFFF33', '#33FFFF', '#FF33FF'];
+    ```
+
+### Style the Regions
+
+Visual aesthetics play a crucial role in map design. For each region, we will define a styling function that determines its appearance. We will set the fill colour based on the index to ensure each region receives a different colour.
+
+    ```
+
+    style: function (feature) {
+    return {
+        weight: 0.1,
+        color: colors[index % colors.length], // Assign colour based on index
+        fillOpacity: 0.2,
+    };
+    },
+    ```
+    
+
+### Add Interactivity
+
+Interactivity enhances user engagement and understanding. Let’s incorporate hover effects to highlight regions when the mouse cursor hovers over them, providing users with intuitive feedback.
+
+    ```
+
+    // Define the highlight style for hover
+    let highlightStyle = {
+    weight: 2,
+    color: '#4b88b6',
+    fillOpacity: 0.3,
+    };
+
+    // Add hover and click interactions
+    layer.on({
+    mouseover: function (e) {
+        layer.setStyle(highlightStyle); // Apply highlight style on mouseover
+    },
+    mouseout: function (e) {
+        layer.setStyle({
+        weight: 0.1,
+        color: colors[index % colors.length], // Maintain consistent colour on mouseout
+        fillOpacity: 0.2,
+        });
+    },
+    });
+    ```
+    
+
+**Finally, the integrated code looks like this.**
+
+    ```
+
+    // Retrieve region data from the context
+    let dataForRegions = {{ data_for_regions|safe }};
+    let regionData = Array.from(dataForRegions);
+
+    let colors = ['#FF5733', '#33FF57', '#5733FF', '#FFFF33', '#33FFFF', '#FF33FF'];
+
+    // Define the highlight style for hover
+    let highlightStyle = {
+    weight: 2,
+    color: '#4b88b6',
+    fillOpacity: 0.3,
+    };
+
+    // Iterate through each region and create a GeoJSON layer
+    regionData.forEach(function (region, index) {
+
+    let geojsonLayer = L.geoJSON(region, {
+        style: function (feature) {
+        return {
+            weight: 0.1,
+            color: colors[index % colors.length], // Assign colour based on index
+            fillOpacity: 0.2,
+        };
+        },
+
+        onEachFeature: function (feature, layer) {
+        if (feature.properties && feature.properties.popupContent) {
+            let popupContent = '<b>' + feature.properties.name + '</b><br>';
+            layer.bindPopup(popupContent);
+        }
+
+        // Add hover and click interactions
+        layer.on({
+            mouseover: function (e) {
+            layer.setStyle(highlightStyle); // Apply highlight style on mouseover
+            },
+            mouseout: function (e) {
+            layer.setStyle({
+                weight: 0.1,
+                color: colors[index % colors.length], // Maintain consistent colour on mouseout
+                fillOpacity: 0.2,
+            });
+            },
+        });
+        },
+    }).addTo(map);
+    });
+    ```
+    
+
+![Final Map with Regions](/leaflet-2/4.png)
+
+Conclusion
+----------
+
+The addition of custom regions to our Leaflet map not only enhances its visual appeal but also deepens its informational significance. Regions serve as essential spatial units, organizing data and offering context for analysis. By incorporating them and applying interactive styling, we can create maps that are both informative and engaging. This integration allows for comparative analysis while also adding visual hierarchy and clarity to our map. As we further explore mapping technologies, integrating regions opens up new avenues for data visualization and storytelling, enabling us to create compelling visual narratives that inform and ianspire.
+
+References
+----------
+
+*   [Previous Blog for Leaflet mapping](https://arcsoft.uvic.ca/log/2023-12-30-leaflet-maps-introduction/)
+*   [GeoJSON Docs](https://doc.arcgis.com/en/arcgis-online/reference/geojson.htm)
+*   [geojson.io](https://geojson.io/)
+*   [Leaflet GeoJSON Docs](https://leafletjs.com/examples/geojson/)
+
