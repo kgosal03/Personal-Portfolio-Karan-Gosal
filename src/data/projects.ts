@@ -1,7 +1,3 @@
-// src/data/projects.ts
-import { time } from "console"
-import { Calendar, Github } from "lucide-react"
-
 export const projects = [
   {
     title: "Phish Finder: Email Classification",

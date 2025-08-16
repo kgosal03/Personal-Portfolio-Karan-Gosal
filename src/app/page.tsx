@@ -2,6 +2,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Link from "next/link";
 import { getBlogPosts } from "@/lib/getBlogPosts";
+import Image from "next/image";
 
 export default function Home() {
   const blogPosts = getBlogPosts().slice(0, 2);
@@ -79,7 +80,7 @@ export default function Home() {
           {/* Education Item */}
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 src="/work-education/uvic.png"
                 alt="University of Victoria"
                 className="w-14 h-14 rounded-lg object-contain border"
@@ -103,7 +104,7 @@ export default function Home() {
           <div className="flex items-center justify-between w-full">
             {/* Left: Image + Details */}
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 src="/work-education/rivos.png"
                 alt="rivos"
                 className="w-14 h-14 rounded-lg object-contain border"
@@ -121,7 +122,7 @@ export default function Home() {
           <div className="flex items-center justify-between w-full">
             {/* Left: Image + Details */}
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 src="/work-education/uvic.png"
                 alt="University of Victoria"
                 className="w-14 h-14 rounded-lg object-contain border"
@@ -139,7 +140,7 @@ export default function Home() {
           <div className="flex items-center justify-between w-full">
             {/* Left: Image + Details */}
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 src="/work-education/vertigis.png"
                 alt="VertiGIS"
                 className="w-14 h-14 rounded-lg object-contain border"
