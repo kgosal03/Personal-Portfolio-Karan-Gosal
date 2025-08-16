@@ -12,7 +12,7 @@ export const projects = [
     date: "Sept. 2025",
     tech: ["Python", "FastAPI", "Next.js", "LLaMA 3.1", "ChromaDB", "Docker"],
     description:
-      "Developed a Retrieval-Augmented Generation (RAG) AI assistant giving natural language access to 1.74 PB of oceanographic data, integrating BERT embeddings, semantic routing, and LLaMA models. Benchmarked at 81% accuracy, delivering transparent, cited insights for researchers, policymakers, and educators.",
+      "Developed a hybrid AI assistant providing natural language access to 1.74 PB of oceanographic data and documentation. Built a RAG pipeline over Ocean Networks Canada reports using transformer-based embeddings stored in ChromaDB, combined with semantic routing and LLaMA models for grounded responses. The system also generated structured API calls for accessing observational time-series data. Benchmarked at 81% accuracy, delivering transparent, cited insights for researchers, policymakers, and educators.",
     sourceCode:
       "https://github.com/kgosal03/Ocean-Network-Canada-Assistant",
   },
