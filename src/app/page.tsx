@@ -71,7 +71,7 @@ export default function Home() {
         {/* Introduction */}
         <section className="space-y-5">
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Hey, I'm Karan Gosal
+            Hey, I&apos;m Karan Gosal
           </h1>
 
           {/* Social Links */}
@@ -116,7 +116,7 @@ export default function Home() {
 
           <div className="space-y-4 text-base leading-7 text-foreground/90 sm:text-lg">
             <p>
-              I'm a <strong>Software Engineer</strong> and
+              I&apos;m a <strong>Software Engineer</strong> and
               M.S. Computer Science student at{" "}
               <strong>Georgia Tech</strong>, specializing in{" "}
               <strong>Computing Systems</strong>.
