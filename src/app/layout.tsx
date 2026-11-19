@@ -1,113 +1,80 @@
-import "./globals.css"
-import type { Metadata } from "next"
-import { ThemeProvider } from "@/components/theme-provider"
-import { ModeToggle } from "@/components/mode-toggle"
-import {
-  NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuLink,
-} from "@/components/ui/navigation-menu"
-import Link from "next/link"
-import Image from "next/image"
+import "./globals.css";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
-  title: "Home",
-  description: "Next.js + shadcn/ui site",
-}
+  metadataBase: new URL("https://karangosal.com"),
+  title: {
+    default: "Karan Gosal — Systems & Software Engineer",
+    template: "%s | Karan Gosal",
+  },
+  description:
+    "Software Engineer pursuing an M.S. in Computer Science at Georgia Tech specializing in Computing Systems. Interests include distributed systems, cloud infrastructure, AI systems, and real-time computing.",
+  keywords: [
+    "Karan Gosal",
+    "Software Engineer",
+    "Systems Engineer",
+    "Georgia Tech",
+    "Distributed Systems",
+    "Cloud Infrastructure",
+    "AI Infrastructure",
+    "FreeRTOS",
+    "Rivos",
+    "Meta",
+  ],
+  authors: [{ name: "Karan Gosal", url: "https://github.com/kgosal03" }],
+  creator: "Karan Gosal",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://karangosal.com",
+    title: "Karan Gosal — Systems & Software Engineer",
+    description:
+      "Software Engineer pursuing an M.S. in Computer Science at Georgia Tech specializing in Computing Systems. ex-Meta/Rivos AI infrastructure intern.",
+    siteName: "Karan Gosal Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Karan Gosal — Systems & Software Engineer",
+    description:
+      "Software Engineer pursuing an M.S. in Computer Science at Georgia Tech specializing in Computing Systems.",
+  },
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-background text-foreground">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          
-          {/* NAVIGATION BAR */}
-          <nav className="w-full border-b border-border">
-            <div className="flex items-center justify-between w-[90%] sm:w-[50%] max-w-6xl mx-auto px-4 py-3">
-              
-              {/* Left: Logo + Links */}
-              <div className="flex items-center space-x-4">
-                {/* Logo / Icon that links to home */}
-                <Link href="/" className="flex items-center">
-                  <div className="relative w-12 h-8 dark:hidden">
-                    <Image
-                      src="/kg-white.png"
-                      alt="Logo"
-                      fill
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
-                  <div className="relative w-12 h-8 hidden dark:block">
-                    <Image
-                      src="/kg-dark.png"
-                      alt="Logo"
-                      fill
-                      className="object-contain"
-                      priority
-                    />
-                  </div>
-                </Link>
-
-                {/* Navigation Links */}
-                <NavigationMenu>
-                  <NavigationMenuList className="flex space-x-2">
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Link href="/" className="px-4 py-2">Home</Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Link href="/blogs" className="px-4 py-2">Blogs</Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                    <NavigationMenuItem>
-                      <NavigationMenuLink asChild>
-                        <Link href="/projects" className="px-4 py-2">Projects</Link>
-                      </NavigationMenuLink>
-                    </NavigationMenuItem>
-                  </NavigationMenuList>
-                </NavigationMenu>
-              </div>
-              {/* Right: Dark Mode Toggle */}
-              <ModeToggle />
-            </div>
-          </nav>
-
-          {/* Page Content */}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} font-sans min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
           <main className="flex-1">{children}</main>
-          {/* FOOTER */}
-          <footer className="w-full border-t border-border mt-8">
-            <div className="w-[90%] sm:w-[50%] max-w-6xl mx-auto px-4 py-4 flex justify-between items-center text-sm text-muted-foreground">
-              <span>© {new Date().getFullYear()} Karan Gosal. All rights reserved.</span>
-              <div className="flex space-x-4">
-                <Link
-                  href="https://github.com/kgosal03"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors"
-                >
-                  GitHub
-                </Link>
-                <Link
-                  href="https://linkedin.com/in/kgosal03"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors"
-                >
-                  LinkedIn
-                </Link>
-              </div>
-            </div>
-          </footer>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
-  )
+  );
 }
