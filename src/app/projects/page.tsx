@@ -1,59 +1,32 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, Github } from "lucide-react"
-import { projects } from "@/data/projects"
+import type { Metadata } from "next";
+import { projects } from "@/data/projects";
+import { ProjectList } from "./project-list";
 
-export default function Projects() {
+export const metadata: Metadata = {
+  title: "Projects",
+  description:
+    "Engineering projects by Karan Gosal spanning distributed systems, AI infrastructure, real-time embedded kernels, and cloud architectures.",
+  openGraph: {
+    title: "Projects | Karan Gosal",
+    description:
+      "Engineering projects spanning distributed systems, AI infrastructure, real-time embedded kernels, and cloud architectures.",
+  },
+};
+
+export default function ProjectsPage() {
   return (
-    <main className="flex flex-col items-start justify-start min-h-screen w-[90%] sm:w-[50%] mx-auto px-8 py-10">
-      <h1 className="text-3xl font-bold mb-6">Projects</h1>
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-5 py-10 sm:px-8 sm:py-16">
+      <header className="space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          Engineering Projects
+        </h1>
+        <p className="text-sm text-muted-foreground sm:text-base leading-relaxed">
+          A collection of systems, infrastructure pipelines, and embedded firmware
+          projects built with an emphasis on reliability, performance, and deterministic behavior.
+        </p>
+      </header>
 
-      <div className="grid gap-6 w-full justify-start"
-     style={{
-       gridTemplateColumns: "repeat(auto-fit, minmax(272px, 1fr))"
-     }}>
-        {projects.map((project, index) => (
-          <Card key={index} className="flex flex-col w-full min-w-[272px] min-h-[404px]">
-            <CardHeader>
-              <CardTitle>{project.title}</CardTitle>
-              <CardDescription className="grid grid-rows-2 gap-2">
-                <div className="flex items-center text-sm text-muted-foreground">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  {project.date}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, i) => (
-                    <Badge key={i}>{tech}</Badge>
-                  ))}
-                </div>
-              </CardDescription>
-            </CardHeader>
-
-            <CardContent>
-              <p className="text-sm text-muted-foreground">
-                {project.description}
-              </p>
-            </CardContent>
-
-            {/* Footer is pushed to the bottom with mt-auto */}
-            <CardFooter className="flex justify-start mt-auto">
-              {project.sourceCode && (
-                <Button variant="outline" size="sm" asChild>
-                  <a
-                    href={project.sourceCode}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2"
-                  >
-                    <Github className="w-4 h-4" /> Source Code
-                  </a>
-                </Button>
-              )}
-            </CardFooter>
-          </Card>
-        ))}
-      </div>
-    </main>
+      <ProjectList projects={projects} />
+    </div>
   );
 }
